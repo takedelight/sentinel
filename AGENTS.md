@@ -25,7 +25,8 @@ bun run lint               # oxlint per workspace
 bun run typecheck          # next typegen && tsc / tsc per workspace
 bun run test               # vitest (web) + bun test (api)
 bun run format             # oxfmt
-bun run format:check       # oxfmt --check (CI)
+bun run format:check       # oxfmt --check
+bun run fullcheck          # lint + format:check + typecheck + test (CI runs this)
 ```
 
 Go (from the root, `./...` does not work in workspace mode):

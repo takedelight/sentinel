@@ -30,7 +30,8 @@ bun run build   # build everything
 | `bun run typecheck`    | `turbo run typecheck` — `next typegen` + `tsc`        |
 | `bun run test`         | `turbo run test` — Vitest + `bun test`                |
 | `bun run format`       | `turbo run format` — oxfmt                          |
-| `bun run format:check` | oxfmt check (used in CI)                            |
+| `bun run format:check` | oxfmt check                                         |
+| `bun run fullcheck`    | lint + format check + typecheck + test in one run (CI) |
 
 Go checks (from the root; plain `./...` does not work in workspace mode):
 
