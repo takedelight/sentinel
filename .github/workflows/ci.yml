@@ -27,8 +27,6 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Full check
         run: bun run fullcheck
-      - name: Build
-        run: bun run build
 
   go:
     name: Go

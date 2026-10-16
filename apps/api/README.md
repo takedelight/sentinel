@@ -101,4 +101,4 @@ docker-compose.yaml        # postgres + minio
 - **oxlint** — линтер; конфиг — в корне репо (`oxlint.config.ts`); отдельно настроены баны: прямой доступ к `env` и non-null assertion (`!`)
 - **oxfmt** — форматтер; конфиг — в корне репо (`oxfmt.config.ts`)
 - **drizzle-kit** — миграции
-- **GitHub Actions** — на каждый push/PR: `fullcheck` (lint + формат + типы + тесты) и сборка
+- **GitHub Actions** — на каждый push/PR: `fullcheck` (lint + формат + типы + тесты)

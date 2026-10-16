@@ -65,5 +65,5 @@ replaces it. Do not remove that option and do not recreate
 
 `.github/workflows/ci.yml` runs on push to `main` and on PRs:
 
-- JS: `bun install --frozen-lockfile` → lint → typecheck → test → build
+- JS: `bun install --frozen-lockfile` → `fullcheck` (lint + format + typecheck + test)
 - Go: `go vet` + `go test` (only when `apps/agent` contains `*.go` files)
