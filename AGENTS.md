@@ -7,8 +7,8 @@ Actions. Package manager is **Bun** — never run npm/pnpm/yarn here.
 
 | Path                  | Package            | Stack                                             |
 | --------------------- | ------------------ | ------------------------------------------------- |
-| `apps/nextjs-template`  | `@sentinel/web`    | Next.js 16 (App Router), React 19, Tailwind 4, Vitest |
-| `apps/elysiajs-template`| `@sentinel/api`    | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`   |
+| `apps/web`  | `@sentinel/web`    | Next.js 16 (App Router), React 19, Tailwind 4, Vitest |
+| `apps/api`  | `@sentinel/api`    | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`   |
 | `apps/agent`          | `@sentinel/agent`  | Go module (workspace via `go.work`, currently no sources) |
 | `packages/tsconfig`   | `@sentinel/tsconfig` | Shared TypeScript configs (`base.json`, `next.json`) |
 
@@ -42,8 +42,8 @@ go vet ./apps/agent/... && go test ./apps/agent/...
 - Commits follow Conventional Commits.
 - Pre-commit hook runs `lint-staged` per workspace (format + lint of staged
   files). Typecheck and tests are CI's job — do not run them on commit.
-- Lint configs live per app: `apps/nextjs-template/oxlint.config.ts`,
-  `apps/elysiajs-template/.oxlintrc.json`.
+- Lint configs live per app: `apps/web/oxlint.config.ts`,
+  `apps/api/.oxlintrc.json`.
 - In `@sentinel/api`, `process.env` is read only through `src/utils/env`
   (enforced by oxlint; tests may stub env before importing the app).
 - `.env` lives at the repo root, never commit it. Shared TS config lives in
@@ -53,13 +53,13 @@ go vet ./apps/agent/... && go test ./apps/agent/...
 
 **This is NOT the Next.js you know.** APIs, conventions and file structure may
 differ from your training data. Read the bundled, version-matched docs at
-`apps/nextjs-template/node_modules/next/dist/docs/` before writing any code.
+`apps/web/node_modules/next/dist/docs/` before writing any code.
 Heed deprecation notices.
 
 Next's auto-generation of app-level `AGENTS.md` is deliberately disabled
-(`agentRules: false` in `apps/nextjs-template/next.config.ts`) — this root file
+(`agentRules: false` in `apps/web/next.config.ts`) — this root file
 replaces it. Do not remove that option and do not recreate
-`apps/nextjs-template/AGENTS.md`; `next dev` would fight you over it.
+`apps/web/AGENTS.md`; `next dev` would fight you over it.
 
 ## CI
 
