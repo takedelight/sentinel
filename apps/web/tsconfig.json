@@ -5,7 +5,8 @@
     "noFallthroughCasesInSwitch": true,
     "verbatimModuleSyntax": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@sentinel/ui/*": ["../../packages/ui/src/*"]
     }
   },
   "include": [

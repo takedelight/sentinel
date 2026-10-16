@@ -30,7 +30,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 - **Next.js 16.3** — App Router, Turbopack, `reactCompiler: true`
 - **React 19.2** + **TypeScript 5.9** (`strict` + `noUncheckedIndexedAccess` + `verbatimModuleSyntax`)
-- **Tailwind CSS v4** — CSS-first config in `src/app/globals.css`
+- **Tailwind CSS v4** — CSS-first config in the shared `@sentinel/ui` stylesheet
 - **Bun** as the package manager and script runner
 
 ## Code quality toolchain
@@ -41,24 +41,21 @@ Open [http://localhost:3000](http://localhost:3000).
 - Plugins: `react`, `nextjs`, `typescript`, `import`, `jsx-a11y`, `unicorn`, `oxc`, `react-perf`, `promise`, `vitest`
 - **Tailwind linting** via `eslint-plugin-tailwindcss` (contradicting classes, shorthands, arbitrary values)
 - The Tailwind plugin runs through oxlint's `jsPlugins` — no ESLint installed
-- Generated shadcn code is ignored: `src/shared/ui/**`
+- Vendored shadcn code lives in `packages/ui` (`@sentinel/ui`); its `src/**` is ignored
 
 ### Format — oxfmt (repo-root `oxfmt.config.ts`)
 
 - `printWidth: 100`
 - Import sorting in perfectionist groups (`type` → builtin/external → internal → relative)
-- Tailwind class sorting driven by `globals.css` (`clsx` / `cn` aware)
+- Tailwind class sorting driven by the `@sentinel/ui` stylesheet (`clsx` / `cn` aware)
 - `package.json` key sorting is on by default
 - Wired into Zed via `format_on_save` with the `oxfmt` language server
 
 ### Git hooks — husky + lint-staged (`.husky/pre-commit`)
 
-Every commit runs, in order:
-
-1. `lint-staged` — `oxfmt --write` + `oxlint` on staged JS/TS files, `oxfmt --write` on JSON/CSS/MD/YAML/TOML
-2. `bun run typecheck` — `tsc --noEmit` over the whole project
-
-Type checking runs from the hook, not from lint-staged, because lint-staged appends file paths to commands and `tsc` ignores `tsconfig.json` when files are passed explicitly.
+The repo-root hook runs `lint-staged` per workspace: `oxfmt --write` + `oxlint`
+on staged JS/TS files, `oxfmt --write` on JSON/CSS/MD/YAML/TOML. Typecheck and
+tests run in CI via `fullcheck`.
 
 ### Line endings — `.gitattributes`
 
@@ -68,14 +65,14 @@ All text files are LF in the repo and in the working copy; `*.png` / `*.ico` are
 
 ```
 src/
-  app/            # Next.js App Router (routes, layout, global styles)
-  shared/         # (planned) FSD layer: ui, lib, config — shadcn lives here
+  app/            # Next.js App Router (routes, layout)
+  shared/         # (planned) FSD layer: lib, config
   widgets/        # (planned)
   features/       # (planned)
   entities/       # (planned)
 ```
 
-FSD layer directories appear as soon as the first real feature lands (no lint enforcement). `src/shared/ui/**` is excluded from linting/formatting because it holds generated shadcn code.
+FSD layer directories appear as soon as the first real feature lands (no lint enforcement). Shared UI comes from `@sentinel/ui` (`packages/ui`): generated shadcn code excluded from linting/formatting.
 
 ## Testing — Vitest
 
@@ -110,7 +107,6 @@ Commit messages follow [Conventional Commits](https://www.conventionalcommits.or
 ## Not configured yet
 
 - CI/CD pipeline
-- shadcn `components.json`
 - Environment variable validation
 - oxlint type-aware linting (`oxlint-tsgolint`)
 - E2E tests (Playwright)

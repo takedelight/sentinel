@@ -3,8 +3,11 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "oxlint";
 
 // The Tailwind plugin resolves relative CSS paths from the linted file's
-// nearest package root, so pass an absolute path instead.
-const webGlobalsCss = fileURLToPath(new URL("./apps/web/src/app/globals.css", import.meta.url));
+// nearest package root, so pass an absolute path instead. The shared
+// stylesheet lives in packages/ui (@sentinel/ui).
+const uiGlobalsCss = fileURLToPath(
+  new URL("./packages/ui/src/styles/globals.css", import.meta.url),
+);
 
 // Single oxlint config for the whole monorepo. oxlint resolves the nearest
 // config for every linted file, so running the lint task from an app directory
@@ -21,7 +24,7 @@ export default defineConfig({
       version: "19.2",
     },
     tailwindcss: {
-      cssConfigPath: webGlobalsCss,
+      cssConfigPath: uiGlobalsCss,
     },
   },
   ignorePatterns: ["apps/web/src/shared/ui/**", "packages/ui/src/**", "apps/api/drizzle/**"],

@@ -45,8 +45,9 @@ go vet ./apps/agent/... && go test ./apps/agent/...
 - Lint/format configs live at the repo root (`oxlint.config.ts`,
   `oxfmt.config.ts`); app differences go through per-app `overrides`.
 - UI components live in `packages/ui` (`@sentinel/ui`, shadcn `base-nova`
-  preset); add them from that directory with
-  `bunx --bun shadcn@latest add <name>`. Vendored component source under
+  preset) and are consumed by `apps/web` via `@sentinel/ui/*` subpath imports
+  (`transpilePackages`); add them from `packages/ui` with
+  `bunx --bun shadcn@latest add <name>`. Vendored source under
   `packages/ui/src/**` is ignored by oxlint/oxfmt; `typecheck` still covers it.
 - In `@sentinel/api`, `process.env` is read only through `src/utils/env`
   (enforced by oxlint; tests may stub env before importing the app).
