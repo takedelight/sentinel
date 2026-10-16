@@ -5,12 +5,12 @@ Actions. Package manager is **Bun** — never run npm/pnpm/yarn here.
 
 ## Layout
 
-| Path                  | Package            | Stack                                             |
-| --------------------- | ------------------ | ------------------------------------------------- |
-| `apps/web`  | `@sentinel/web`    | Next.js 16 (App Router), React 19, Tailwind 4, Vitest |
-| `apps/api`  | `@sentinel/api`    | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`   |
-| `apps/agent`          | `@sentinel/agent`  | Go module (workspace via `go.work`, currently no sources) |
-| `packages/tsconfig`   | `@sentinel/tsconfig` | Shared TypeScript configs (`base.json`, `next.json`) |
+| Path                | Package              | Stack                                                     |
+| ------------------- | -------------------- | --------------------------------------------------------- |
+| `apps/web`          | `@sentinel/web`      | Next.js 16 (App Router), React 19, Tailwind 4, Vitest     |
+| `apps/api`          | `@sentinel/api`      | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`         |
+| `apps/agent`        | `@sentinel/agent`    | Go module (workspace via `go.work`, currently no sources) |
+| `packages/tsconfig` | `@sentinel/tsconfig` | Shared TypeScript configs (`base.json`, `next.json`)      |
 
 Directory names differ from package names — always match on the `name` field in
 `package.json`.
@@ -42,8 +42,8 @@ go vet ./apps/agent/... && go test ./apps/agent/...
 - Commits follow Conventional Commits.
 - Pre-commit hook runs `lint-staged` per workspace (format + lint of staged
   files). Typecheck and tests are CI's job — do not run them on commit.
-- Lint configs live per app: `apps/web/oxlint.config.ts`,
-  `apps/api/.oxlintrc.json`.
+- Lint/format configs live at the repo root (`oxlint.config.ts`,
+  `oxfmt.config.ts`); app differences go through per-app `overrides`.
 - In `@sentinel/api`, `process.env` is read only through `src/utils/env`
   (enforced by oxlint; tests may stub env before importing the app).
 - `.env` lives at the repo root, never commit it. Shared TS config lives in

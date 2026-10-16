@@ -25,10 +25,8 @@
   "devDependencies": {
     "@sentinel/tsconfig": "workspace:*",
     "@types/pg": "^8.23.1",
-    "@typescript-eslint/utils": "^8.71.0",
     "bun-types": "latest",
     "drizzle-kit": "^1.0.0-rc.4",
-    "eslint-plugin-drizzle": "^0.2.3",
     "lint-staged": "^17.6.0",
     "typescript": "^7.0.2"
   },

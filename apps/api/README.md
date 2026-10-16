@@ -17,19 +17,19 @@ bun run dev                 # http://localhost:3000
 
 ## Команды
 
-| команда               | что делает                                |
-| --------------------- | ----------------------------------------- |
-| `bun run dev`         | дев-сервер с `--watch`                    |
-| `bun run start`       | запуск без watch                          |
-| `bun run lint`        | oxlint                                    |
-| `bun run lint:fix`    | oxlint с автоисправлениями                |
-| `bun run fmt`         | oxfmt — форматирование                    |
-| `bun run fmt:check`   | oxfmt --check (для CI)                    |
-| `bun run typecheck`   | `tsc --noEmit`                            |
-| `bun test`            | тесты (bun test)                          |
-| `bun run db:generate` | сгенерировать миграцию из изменений схемы |
-| `bun run db:migrate`  | применить миграции                        |
-| `bun run db:studio`   | drizzle-studio (GUI по данным)            |
+| команда                | что делает                                |
+| ---------------------- | ----------------------------------------- |
+| `bun run dev`          | дев-сервер с `--watch`                    |
+| `bun run start`        | запуск без watch                          |
+| `bun run lint`         | oxlint                                    |
+| `bun run lint:fix`     | oxlint с автоисправлениями                |
+| `bun run format`       | oxfmt — форматирование                    |
+| `bun run format:check` | oxfmt --check (для CI)                    |
+| `bun run typecheck`    | `tsc --noEmit`                            |
+| `bun test`             | тесты (bun test)                          |
+| `bun run db:generate`  | сгенерировать миграцию из изменений схемы |
+| `bun run db:migrate`   | применить миграции                        |
+| `bun run db:studio`    | drizzle-studio (GUI по данным)            |
 
 ## API
 
@@ -98,7 +98,7 @@ docker-compose.yaml        # postgres + minio
 
 ## Инструменты
 
-- **oxlint** — линтер; отдельно настроены баны: прямой доступ к `env` и non-null assertion (`!`)
-- **oxfmt** — форматтер (`.oxfmtrc.json`)
+- **oxlint** — линтер; конфиг — в корне репо (`oxlint.config.ts`); отдельно настроены баны: прямой доступ к `env` и non-null assertion (`!`)
+- **oxfmt** — форматтер; конфиг — в корне репо (`oxfmt.config.ts`)
 - **drizzle-kit** — миграции
-- **GitHub Actions** — на каждый push/PR: lint → fmt:check → typecheck → test
+- **GitHub Actions** — на каждый push/PR: `fullcheck` (lint + формат + типы + тесты) и сборка

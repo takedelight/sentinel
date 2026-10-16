@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `bun run dev`          | Dev server (Turbopack, React Compiler)        |
 | `bun run build`        | Production build                              |
 | `bun run start`        | Serve the production build                    |
-| `bun run lint`         | oxlint over the project (286 rules)           |
+| `bun run lint`         | oxlint over the project (282 rules)           |
 | `bun run lint:fix`     | oxlint with autofix                           |
 | `bun run typecheck`    | `tsc --noEmit` — full-project type check      |
 | `bun run format`       | Format everything with oxfmt (rewrites files) |
@@ -35,7 +35,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Code quality toolchain
 
-### Lint — oxlint (`oxlint.config.ts`)
+### Lint — oxlint (repo-root `oxlint.config.ts`)
 
 - 282 rules: `correctness` as errors, `perf` and `suspicious` as warnings
 - Plugins: `react`, `nextjs`, `typescript`, `import`, `jsx-a11y`, `unicorn`, `oxc`, `react-perf`, `promise`, `vitest`
@@ -43,7 +43,7 @@ Open [http://localhost:3000](http://localhost:3000).
 - The Tailwind plugin runs through oxlint's `jsPlugins` — no ESLint installed
 - Generated shadcn code is ignored: `src/shared/ui/**`
 
-### Format — oxfmt (`oxfmt.config.ts`)
+### Format — oxfmt (repo-root `oxfmt.config.ts`)
 
 - `printWidth: 100`
 - Import sorting in perfectionist groups (`type` → builtin/external → internal → relative)
