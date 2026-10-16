@@ -43,6 +43,8 @@ go vet ./apps/agent/... && go test ./apps/agent/...
 
 - **Package manager:** Bun (`packageManager: bun@1.4.2`)
 - **Task runner:** Turborepo (`turbo.json`), local cache in `.turbo/`
+- **Dev infra:** root `docker-compose.yaml` (Postgres + MinIO for the API) —
+  `docker compose up -d`
 - **Lint/format:** oxlint + oxfmt (root configs with per-app `overrides`)
 - **Git hooks:** husky + lint-staged at the repo root (format + lint on commit;
   typecheck and tests run in CI)

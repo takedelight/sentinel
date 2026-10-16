@@ -48,6 +48,8 @@ go vet ./apps/agent/... && go test ./apps/agent/...
   (enforced by oxlint; tests may stub env before importing the app).
 - `.env` lives at the repo root, never commit it. Shared TS config lives in
   `@sentinel/tsconfig`; apps keep only their own options in `tsconfig.json`.
+- Dev infra (Postgres + MinIO for the API) is the root `docker-compose.yaml`;
+  start it with `docker compose up -d` from the root.
 
 ## Next.js (@sentinel/web)
 

@@ -5,15 +5,20 @@
 
 ## Быстрый старт
 
+Первые команды — из корня репозитория (`.env` и `docker-compose.yaml` общие
+для монорепо):
+
 ```bash
 bun install
 cp .env.example .env        # Windows (PowerShell): Copy-Item .env.example .env
 docker compose up -d        # postgres + minio
+
+cd apps/api
 bun run db:migrate          # применить миграции
 bun run dev                 # http://localhost:3000
 ```
 
-Не забудьте заменить `JWT_SECRET` в `.env` (минимум 16 символов).
+Не забудьте заменить `JWT_SECRET` в корневом `.env` (минимум 16 символов).
 
 ## Команды
 
@@ -68,13 +73,13 @@ src/
     └── logger/index.ts    # логгер запросов
 drizzle/                   # сгенерированные миграции
 drizzle.config.ts
-docker-compose.yaml        # postgres + minio
 ```
 
 ## Переменные окружения
 
-Скопируйте `.env.example` → `.env`. Схема в `src/utils/env/index.ts` проверяет
-`NODE_ENV`, `PORT`, `DATABASE_URL`, `JWT_SECRET` при старте и завершает процесс при ошибке.
+`.env` живёт в корне репозитория: скопируйте туда `.env.example`. Схема в
+`src/utils/env/index.ts` проверяет `NODE_ENV`, `PORT`, `DATABASE_URL`,
+`JWT_SECRET` при старте и завершает процесс при ошибке.
 
 Оксилинт запрещает обращения к `Bun.env`/`process.env` вне этой схемы — берите env только
 через `import { env } from "@/utils/env"`.
@@ -89,10 +94,10 @@ docker-compose.yaml        # postgres + minio
 
 ## Docker
 
-`docker compose up -d` поднимает:
+`docker compose up -d` из корня репозитория поднимает:
 
 - **postgres** — переменные `DATABASE_USER/PASSWORD/NAME/PORT` с дефолтами,
-  совпадающими с `DATABASE_URL` из `.env.example`
+  совпадающими с `DATABASE_URL` из корневого `.env.example`
 - **minio** + **minio-init** — создаёт бакет `STORAGE_BUCKET_NAME` и правило
   автоочистки для `temp/`
 
