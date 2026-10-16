@@ -1,0 +1,68 @@
+# sentinel — instructions for AI agents
+
+Monorepo: Bun workspaces + Turborepo for JS/TS, `go.work` for Go, CI in GitHub
+Actions. Package manager is **Bun** — never run npm/pnpm/yarn here.
+
+## Layout
+
+| Path                  | Package            | Stack                                             |
+| --------------------- | ------------------ | ------------------------------------------------- |
+| `apps/nextjs-template`  | `@sentinel/web`    | Next.js 16 (App Router), React 19, Tailwind 4, Vitest |
+| `apps/elysiajs-template`| `@sentinel/api`    | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`   |
+| `apps/agent`          | `@sentinel/agent`  | Go module (workspace via `go.work`, currently no sources) |
+| `packages/tsconfig`   | `@sentinel/tsconfig` | Shared TypeScript configs (`base.json`, `next.json`) |
+
+Directory names differ from package names — always match on the `name` field in
+`package.json`.
+
+## Commands (run from the repo root)
+
+```sh
+bun install                # one lockfile for all workspaces
+bun run dev                # turbo run dev (all dev servers)
+bun run build              # next build + go build
+bun run lint               # oxlint per workspace
+bun run typecheck          # next typegen && tsc / tsc per workspace
+bun run test               # vitest (web) + bun test (api)
+bun run format             # oxfmt
+bun run format:check       # oxfmt --check (CI)
+```
+
+Go (from the root, `./...` does not work in workspace mode):
+
+```sh
+go vet ./apps/agent/... && go test ./apps/agent/...
+```
+
+## Conventions
+
+- Packages are scoped `@sentinel/*`; new apps go in `apps/`, shared code in
+  `packages/` (already covered by `workspaces`).
+- Commits follow Conventional Commits.
+- Pre-commit hook runs `lint-staged` per workspace (format + lint of staged
+  files). Typecheck and tests are CI's job — do not run them on commit.
+- Lint configs live per app: `apps/nextjs-template/oxlint.config.ts`,
+  `apps/elysiajs-template/.oxlintrc.json`.
+- In `@sentinel/api`, `process.env` is read only through `src/utils/env`
+  (enforced by oxlint; tests may stub env before importing the app).
+- `.env` lives at the repo root, never commit it. Shared TS config lives in
+  `@sentinel/tsconfig`; apps keep only their own options in `tsconfig.json`.
+
+## Next.js (@sentinel/web)
+
+**This is NOT the Next.js you know.** APIs, conventions and file structure may
+differ from your training data. Read the bundled, version-matched docs at
+`apps/nextjs-template/node_modules/next/dist/docs/` before writing any code.
+Heed deprecation notices.
+
+Next's auto-generation of app-level `AGENTS.md` is deliberately disabled
+(`agentRules: false` in `apps/nextjs-template/next.config.ts`) — this root file
+replaces it. Do not remove that option and do not recreate
+`apps/nextjs-template/AGENTS.md`; `next dev` would fight you over it.
+
+## CI
+
+`.github/workflows/ci.yml` runs on push to `main` and on PRs:
+
+- JS: `bun install --frozen-lockfile` → lint → typecheck → test → build
+- Go: `go vet` + `go test` (only when `apps/agent` contains `*.go` files)
