@@ -18,6 +18,11 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.4.2
+      # oxlint/oxfmt evaluate their TypeScript configs with Node (>= 22.18)
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          package-manager-cache: false
       - name: Install
         run: bun install --frozen-lockfile
       - name: Full check
