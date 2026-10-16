@@ -1,0 +1,44 @@
+{
+  "name": "@sentinel/api",
+  "version": "1.0.50",
+  "module": "src/index.js",
+  "scripts": {
+    "test": "bun test",
+    "dev": "bun run --watch src/main.ts",
+    "start": "bun run src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "lint-staged": "lint-staged",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "drizzle-orm": "^1.0.0-rc.4",
+    "elysia": "latest",
+    "pg": "^8.23.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@sentinel/tsconfig": "workspace:*",
+    "@types/pg": "^8.23.1",
+    "@typescript-eslint/utils": "^8.71.0",
+    "bun-types": "latest",
+    "drizzle-kit": "^1.0.0-rc.4",
+    "eslint-plugin-drizzle": "^0.2.3",
+    "lint-staged": "^17.6.0",
+    "typescript": "^7.0.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "oxlint --fix",
+      "oxfmt"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "oxfmt"
+    ]
+  }
+}

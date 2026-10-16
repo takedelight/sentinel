@@ -1,0 +1,2 @@
+# Git hooks are executed by sh — keep them LF on every platform
+.husky/** text eol=lf

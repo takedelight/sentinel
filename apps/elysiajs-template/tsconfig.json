@@ -1,0 +1,13 @@
+{
+  "extends": "@sentinel/tsconfig/base.json",
+  "compilerOptions": {
+    "target": "ES2021",
+    "types": ["bun-types"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

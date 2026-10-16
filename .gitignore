@@ -1,0 +1,19 @@
+# JS / TS
+node_modules/
+.next/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Go
+*.exe
+/apps/agent/sentinel-agent
+/apps/agent/dist/
+
+# Окружение и секреты
+.env
+.env.*
+!.env.example
+
+# Система
+.DS_Store
