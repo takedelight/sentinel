@@ -9,7 +9,7 @@ Actions. Package manager is **Bun** — never run npm/pnpm/yarn here.
 | ------------------- | -------------------- | --------------------------------------------------------- |
 | `apps/web`          | `@sentinel/web`      | Next.js 16 (App Router), React 19, Tailwind 4, Vitest     |
 | `apps/api`          | `@sentinel/api`      | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`         |
-| `apps/agent`        | `@sentinel/agent`    | Go module (workspace via `go.work`, currently no sources) |
+| `apps/agent`        | `@sentinel/agent`    | Go module (workspace via `go.work`, `cmd/agent` binary)   |
 | `packages/ui`       | `@sentinel/ui`       | shadcn/ui components (React 19, Base UI, Tailwind 4)      |
 
 Directory names differ from package names — always match on the `name` field in

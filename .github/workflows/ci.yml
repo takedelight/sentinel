@@ -39,7 +39,7 @@ jobs:
       - name: Check for Go sources
         id: check
         run: |
-          if compgen -G "apps/agent/*.go" > /dev/null; then
+          if find apps/agent -name '*.go' -print -quit | grep -q .; then
             echo "has_sources=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_sources=false" >> "$GITHUB_OUTPUT"

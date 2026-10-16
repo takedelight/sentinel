@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "go build ./..."
+    "build": "go build -o dist/sentinel-agent ./cmd/agent",
+    "test": "go test ./...",
+    "vet": "go vet ./..."
   }
 }
