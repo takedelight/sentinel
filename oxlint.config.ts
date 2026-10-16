@@ -24,7 +24,7 @@ export default defineConfig({
       cssConfigPath: webGlobalsCss,
     },
   },
-  ignorePatterns: ["apps/web/src/shared/ui/**", "apps/api/drizzle/**"],
+  ignorePatterns: ["apps/web/src/shared/ui/**", "packages/ui/src/**", "apps/api/drizzle/**"],
   overrides: [
     /* === WEB (@sentinel/web) === */
     {

@@ -7,7 +7,7 @@ import { defineConfig } from "oxfmt";
 export default defineConfig({
   printWidth: 100,
   endOfLine: "lf",
-  ignorePatterns: ["apps/web/src/shared/ui/**", "apps/api/drizzle/**"],
+  ignorePatterns: ["apps/web/src/shared/ui/**", "packages/ui/src/**", "apps/api/drizzle/**"],
   overrides: [
     {
       files: ["apps/web/**"],

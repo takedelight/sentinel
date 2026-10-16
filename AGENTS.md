@@ -10,7 +10,7 @@ Actions. Package manager is **Bun** — never run npm/pnpm/yarn here.
 | `apps/web`          | `@sentinel/web`      | Next.js 16 (App Router), React 19, Tailwind 4, Vitest     |
 | `apps/api`          | `@sentinel/api`      | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`         |
 | `apps/agent`        | `@sentinel/agent`    | Go module (workspace via `go.work`, currently no sources) |
-| `packages/tsconfig` | `@sentinel/tsconfig` | Shared TypeScript configs (`base.json`, `next.json`)      |
+| `packages/ui`       | `@sentinel/ui`       | shadcn/ui components (React 19, Base UI, Tailwind 4)      |
 
 Directory names differ from package names — always match on the `name` field in
 `package.json`.
@@ -44,6 +44,10 @@ go vet ./apps/agent/... && go test ./apps/agent/...
   files). Typecheck and tests are CI's job — do not run them on commit.
 - Lint/format configs live at the repo root (`oxlint.config.ts`,
   `oxfmt.config.ts`); app differences go through per-app `overrides`.
+- UI components live in `packages/ui` (`@sentinel/ui`, shadcn `base-nova`
+  preset); add them from that directory with
+  `bunx --bun shadcn@latest add <name>`. Vendored component source under
+  `packages/ui/src/**` is ignored by oxlint/oxfmt; `typecheck` still covers it.
 - In `@sentinel/api`, `process.env` is read only through `src/utils/env`
   (enforced by oxlint; tests may stub env before importing the app).
 - `.env` lives at the repo root, never commit it. Shared TS config lives in

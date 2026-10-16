@@ -10,7 +10,7 @@ Monorepo for the sentinel project: Bun workspaces + Turborepo (JS/TS) and
 | `apps/web`          | `@sentinel/web`      | Next.js 16 web app (React 19, Tailwind 4) |
 | `apps/api`          | `@sentinel/api`      | Elysia API (Drizzle ORM, PostgreSQL)      |
 | `apps/agent`        | `@sentinel/agent`    | Go agent (workspace via `go.work`)        |
-| `packages/tsconfig` | `@sentinel/tsconfig` | Shared TypeScript configs                 |
+| `packages/ui`       | `@sentinel/ui`       | shadcn/ui components                      |
 
 ## Quick start
 
