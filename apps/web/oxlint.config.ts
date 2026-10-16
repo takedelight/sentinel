@@ -22,10 +22,7 @@ export default defineConfig({
     builtin: true,
     browser: true,
   },
-  jsPlugins: [
-    { name: "fsd", specifier: "eslint-plugin-fsd-lint" },
-    { name: "tailwindcss", specifier: "eslint-plugin-tailwindcss" },
-  ],
+  jsPlugins: [{ name: "tailwindcss", specifier: "eslint-plugin-tailwindcss" }],
   settings: {
     react: {
       version: "19.2",
@@ -87,32 +84,6 @@ export default defineConfig({
     "react/no-unknown-property": "error",
     "react/require-render-return": "error",
     "react/void-dom-elements-no-children": "error",
-
-    /* === FEATURE-SLICED DESIGN (jsPlugins: eslint-plugin-fsd-lint) === */
-    "fsd/forbidden-imports": [
-      "error",
-      { rootPath: "/src/", alias: { value: "@", withSlash: true } },
-    ],
-    "fsd/no-cross-slice-dependency": [
-      "error",
-      { rootPath: "/src/", alias: { value: "@", withSlash: true } },
-    ],
-    "fsd/no-public-api-sidestep": "error",
-    // В v1.2.1 правило сравнивает имя слоя с ["model","api","lib"],
-    // поэтому задаём слои явно; "^\\./" — публичный API (index.ts) сам
-    // импортирует ./ui/*, это легитимно
-    "fsd/no-ui-in-business-logic": [
-      "warn",
-      {
-        rootPath: "/src/",
-        alias: { value: "@", withSlash: true },
-        businessLogicLayers: ["entities", "shared", "features", "widgets"],
-        // "features" не включаем: импорты через /features/* уже
-        // перехватывает fsd/forbidden-imports
-        uiLayers: ["ui", "widgets"],
-        ignoreImportPatterns: ["^\\./"],
-      },
-    ],
 
     /* === TAILWIND CSS (jsPlugins: eslint-plugin-tailwindcss) === */
     "tailwindcss/no-contradicting-classname": "error",

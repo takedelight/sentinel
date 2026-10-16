@@ -37,11 +37,10 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Lint — oxlint (`oxlint.config.ts`)
 
-- 286 rules: `correctness` as errors, `perf` and `suspicious` as warnings
+- 282 rules: `correctness` as errors, `perf` and `suspicious` as warnings
 - Plugins: `react`, `nextjs`, `typescript`, `import`, `jsx-a11y`, `unicorn`, `oxc`, `react-perf`, `promise`, `vitest`
-- **FSD linting** via `eslint-plugin-fsd-lint` (import rules between layers, public API, UI in business logic)
 - **Tailwind linting** via `eslint-plugin-tailwindcss` (contradicting classes, shorthands, arbitrary values)
-- Both rule sets run through oxlint's `jsPlugins` — no ESLint installed
+- The Tailwind plugin runs through oxlint's `jsPlugins` — no ESLint installed
 - Generated shadcn code is ignored: `src/shared/ui/**`
 
 ### Format — oxfmt (`oxfmt.config.ts`)
@@ -76,7 +75,7 @@ src/
   entities/       # (planned)
 ```
 
-The FSD layers are enforced by `fsd/*` rules today; the directories appear as soon as the first real feature lands. `src/shared/ui/**` is excluded from linting/formatting because it holds generated shadcn code.
+FSD layer directories appear as soon as the first real feature lands (no lint enforcement). `src/shared/ui/**` is excluded from linting/formatting because it holds generated shadcn code.
 
 ## Testing — Vitest
 
