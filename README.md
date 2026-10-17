@@ -5,19 +5,21 @@ Monorepo for the sentinel project: Bun workspaces + Turborepo (JS/TS) and
 
 ## Structure
 
-| Path                | Package              | Description                               |
-| ------------------- | -------------------- | ----------------------------------------- |
-| `apps/web`          | `@sentinel/web`      | Next.js 16 web app (React 19, Tailwind 4) |
-| `apps/api`          | `@sentinel/api`      | Elysia API (Drizzle ORM, PostgreSQL)      |
-| `apps/agent`        | `@sentinel/agent`    | Go agent (workspace via `go.work`)        |
-| `packages/ui`       | `@sentinel/ui`       | shadcn/ui components                      |
+| Path          | Package           | Description                               |
+| ------------- | ----------------- | ----------------------------------------- |
+| `apps/web`    | `@sentinel/web`   | Next.js 16 web app (React 19, Tailwind 4) |
+| `apps/api`    | `@sentinel/api`   | Elysia API (Drizzle ORM, PostgreSQL)      |
+| `apps/agent`  | `@sentinel/agent` | Go agent (workspace via `go.work`)        |
+| `packages/ui` | `@sentinel/ui`    | shadcn/ui components                      |
 
 ## Quick start
 
 ```sh
-bun install     # single lockfile for all workspaces
-bun run dev     # start everything (turbo)
-bun run build   # build everything
+bun install            # single lockfile for all workspaces
+cp .env.example .env   # dev env for the API (git-ignored)
+docker compose up -d   # Postgres + MinIO for the API
+bun run dev            # start everything (turbo)
+bun run build          # build everything
 ```
 
 ## Commands

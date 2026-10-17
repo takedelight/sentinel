@@ -15,7 +15,7 @@ docker compose up -d        # postgres + minio
 
 cd apps/api
 bun run db:migrate          # применить миграции
-bun run dev                 # http://localhost:3000
+bun run dev                 # http://localhost:7000
 ```
 
 Не забудьте заменить `JWT_SECRET` в корневом `.env` (минимум 16 символов).

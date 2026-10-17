@@ -5,12 +5,12 @@ Actions. Package manager is **Bun** — never run npm/pnpm/yarn here.
 
 ## Layout
 
-| Path                | Package              | Stack                                                     |
-| ------------------- | -------------------- | --------------------------------------------------------- |
-| `apps/web`          | `@sentinel/web`      | Next.js 16 (App Router), React 19, Tailwind 4, Vitest     |
-| `apps/api`          | `@sentinel/api`      | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`         |
-| `apps/agent`        | `@sentinel/agent`    | Go module (workspace via `go.work`, `cmd/agent` binary)   |
-| `packages/ui`       | `@sentinel/ui`       | shadcn/ui components (React 19, Base UI, Tailwind 4)      |
+| Path          | Package           | Stack                                                   |
+| ------------- | ----------------- | ------------------------------------------------------- |
+| `apps/web`    | `@sentinel/web`   | Next.js 16 (App Router), React 19, Tailwind 4, Vitest   |
+| `apps/api`    | `@sentinel/api`   | Elysia, Drizzle ORM (PostgreSQL), Zod, `bun test`       |
+| `apps/agent`  | `@sentinel/agent` | Go module (workspace via `go.work`, `cmd/agent` binary) |
+| `packages/ui` | `@sentinel/ui`    | shadcn/ui components (React 19, Base UI, Tailwind 4)    |
 
 Directory names differ from package names — always match on the `name` field in
 `package.json`.
@@ -51,8 +51,10 @@ go vet ./apps/agent/... && go test ./apps/agent/...
   `packages/ui/src/**` is ignored by oxlint/oxfmt; `typecheck` still covers it.
 - In `@sentinel/api`, `process.env` is read only through `src/utils/env`
   (enforced by oxlint; tests may stub env before importing the app).
-- `.env` lives at the repo root, never commit it. Shared TS config lives in
-  `@sentinel/tsconfig`; apps keep only their own options in `tsconfig.json`.
+- `.env` lives at the repo root, never commit it; bun does not search parent
+  directories, so API runtime scripts read it via `--env-file=../../.env`.
+  Shared TS config lives in `@sentinel/tsconfig`; apps keep only their own
+  options in `tsconfig.json`.
 - Dev infra (Postgres + MinIO for the API) is the root `docker-compose.yaml`;
   start it with `docker compose up -d` from the root.
 

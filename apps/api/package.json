@@ -4,17 +4,17 @@
   "module": "src/index.js",
   "scripts": {
     "test": "bun test",
-    "dev": "bun run --watch src/main.ts",
-    "start": "bun run src/main.ts",
+    "dev": "bun --env-file=../../.env run --watch src/main.ts",
+    "start": "bun --env-file=../../.env run src/main.ts",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "lint-staged": "lint-staged",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:generate": "bun --env-file=../../.env run drizzle-kit generate",
+    "db:migrate": "bun --env-file=../../.env run drizzle-kit migrate",
+    "db:studio": "bun --env-file=../../.env run drizzle-kit studio"
   },
   "dependencies": {
     "drizzle-orm": "^1.0.0-rc.4",
