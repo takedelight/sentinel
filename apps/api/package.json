@@ -1,7 +1,7 @@
 {
   "name": "@sentinel/api",
   "version": "1.0.50",
-  "module": "src/index.js",
+  "module": "src/main.ts",
   "scripts": {
     "test": "bun test --pass-with-no-tests",
     "dev": "bun run --watch --env-file=../../.env src/main.ts",
