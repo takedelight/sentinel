@@ -1,12 +1,20 @@
 import { Elysia } from "elysia";
-import { system } from "@/modules/system";
-import { health } from "@/modules/health";
 import { buildErrorResponse } from "@/utils/errors";
 import { logger } from "@/utils/logger";
 
+import { env } from "@/utils/env";
+import { auth } from "@/utils/auth";
+import cors from "@elysiajs/cors";
+
 export const app = new Elysia({ name: "app" })
+  .use(
+    cors({
+      origin: env.CORS_ORIGIN,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      credentials: true,
+    }),
+  )
   .use(logger)
-  .use([health, system])
   .onError(({ request, code, error, set }) => {
     const response = buildErrorResponse(code, error);
     set.status = response.status;
@@ -17,4 +25,6 @@ export const app = new Elysia({ name: "app" })
     }
 
     return response.body;
-  });
+  })
+  .mount(auth.handler)
+  .listen(env.APP_PORT);

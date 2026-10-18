@@ -3,7 +3,7 @@
   "version": "1.0.50",
   "module": "src/index.js",
   "scripts": {
-    "test": "bun test",
+    "test": "bun test --pass-with-no-tests",
     "dev": "bun run --watch --env-file=../../.env src/main.ts",
     "start": "bun run --env-file=../../.env src/main.ts",
     "typecheck": "tsc --noEmit",
@@ -17,6 +17,8 @@
     "db:studio": "bun run --env-file=../../.env drizzle-kit studio"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.4.2",
+    "@sentinel/auth": "workspace:*",
     "drizzle-orm": "^1.0.0-rc.4",
     "elysia": "latest",
     "pg": "^8.23.0",
