@@ -6,7 +6,8 @@
     "verbatimModuleSyntax": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@sentinel/ui/*": ["../../packages/ui/src/*"]
+      "@sentinel/ui/*": ["../../packages/ui/src/*"],
+      "@sentinel/auth/*": ["../../packages/auth/src/*"]
     }
   },
   "include": [
