@@ -18,7 +18,7 @@ bun run db:migrate          # применить миграции
 bun run dev                 # http://localhost:7000
 ```
 
-Не забудьте заменить `JWT_SECRET` в корневом `.env` (минимум 16 символов).
+Не забудьте заменить `BETTER_AUTH_SECRET` в корневом `.env` (минимум 16 символов).
 
 ## Команды
 
@@ -77,9 +77,12 @@ drizzle.config.ts
 
 ## Переменные окружения
 
-`.env` живёт в корне репозитория: скопируйте туда `.env.example`. Схема в
-`src/utils/env/index.ts` проверяет `NODE_ENV`, `PORT`, `DATABASE_URL`,
-`JWT_SECRET` при старте и завершает процесс при ошибке.
+`.env` живёт в корне репозитория: скопируйте туда `.env.example`. Bun читает
+`.env` только из рабочей папки, поэтому скрипты пакета передают файл явно через
+`--env-file=../../.env` (`dev`, `start`, `db:*`). Схема в
+`src/utils/env/index.ts` проверяет `NODE_ENV`, `APP_PORT`, `CORS_ORIGIN`,
+`DATABASE_URL`, `GITHUB_CLIENT_ID/SECRET/CALLBACK_URL` и `BETTER_AUTH_URL` при
+старте и завершает процесс при ошибке.
 
 Оксилинт запрещает обращения к `Bun.env`/`process.env` вне этой схемы — берите env только
 через `import { env } from "@/utils/env"`.
