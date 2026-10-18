@@ -1,0 +1,34 @@
+{
+  "name": "@sentinel/auth",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server": "./src/server/index.ts",
+    "./client": "./src/client/index.ts"
+  },
+  "scripts": {
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "typecheck": "tsc --noEmit",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "lint-staged": "lint-staged"
+  },
+  "dependencies": {
+    "@better-auth/infra": "^0.4.20",
+    "better-auth": "^1.7.10"
+  },
+  "devDependencies": {
+    "@sentinel/tsconfig": "workspace:*",
+    "lint-staged": "^17.6.0",
+    "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "oxfmt --write --no-error-on-unmatched-pattern",
+      "bun run lint -- --no-error-on-unmatched-pattern"
+    ],
+    "*.{json,css,md,yml,yaml,toml}": "oxfmt --write --no-error-on-unmatched-pattern"
+  }
+}
