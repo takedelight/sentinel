@@ -2,18 +2,24 @@ import type { Metadata } from "next";
 
 import { Toaster } from "@sentinel/ui/components/toast";
 import "@sentinel/ui/globals.css";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Lora } from "next/font/google";
 
 import { AuthProvider } from "@/features/auth/model";
 
-const geistSans = Geist({
+const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin", "cyrillic"],
 });
 
-const geistMono = Geist_Mono({
+const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin", "cyrillic"],
+});
+
+const lora = Lora({
+  variable: "--font-serif",
+  subsets: ["latin", "cyrillic"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -25,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="uk"
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full font-sans antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${lora.variable} h-full font-sans antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <AuthProvider>{children}</AuthProvider>
