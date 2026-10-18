@@ -28,3 +28,5 @@ export const app = new Elysia({ name: "app" })
   })
   .mount(auth.handler)
   .listen(env.APP_PORT);
+
+console.log(`🦊 Elysia is running at http://localhost:${env.APP_PORT} [${env.NODE_ENV}]`);
